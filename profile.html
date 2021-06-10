@@ -1,0 +1,412 @@
+<html>
+	<head>
+		<title> Logistics </title>
+		<link rel="stylesheet" href="static/css/awesomplete.css" />
+		<script src="static/js/awesomplete.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<link rel="stylesheet" href="static/css/main.css">
+		<script src="static/js/main.js"></script>
+		<link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+		<link href="https://unpkg.com/tabulator-tables@4.7.2//dist/css/bootstrap/tabulator_bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+	</head>
+	<body onload ="Startup(); loginCheck();">
+		<header>
+			<div class="header-logo">
+				<button class="btn header-logo-btn" onclick="openNav()">
+					<p>&#9776;</p>
+				</button>
+			</div>
+			<div class="header-head">
+				<h4 style="color: white;">Profile</h4>
+			</div>
+			<div class ="header-user">
+				<button class="btn dropdown">
+					<i class="fa fa-user"></i>
+				</button>
+				<div class="dropdown-panel"> 
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-user"></i><a href="profile.html">Profile</a>
+					</div>
+					
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-book"></i><a href="transections.html">Transections</a>
+					</div>
+					<div class="dropdown-panel-list" onclick="logout()">
+						<i class = "fa fa-sign-out"></i><a href="">Logout</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav id="nav">
+			<div class="nav-panel">
+				<div class="nav-header">
+					<div class="nav-menu">
+						Menu
+					</div>
+					<div class="nav-close" onclick="closeNav()">
+						&times;	
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="nav-list">
+						<i class="fa fa-home icon"></i> <a href="index.html"> Home</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-user icon"></i> <a href="consigner.html"> Consignor</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-truck icon"></i> <a href="transport.html"> Transport</a>
+					</div>
+					<div class="nav-list">
+						<i class = "fa fa-book icon"></i><a href="transections.html"> Transactions</a>
+					</div>
+					
+					<div class="nav-list">
+						<i class = "fa fa-list-alt"></i><a href="other.html"> Others</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<section>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="profile-img-panel">
+							<img src="static/img/user.png" class="profile-img" />
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="profile-panel">
+							<h3>SV Logistics PVT. LTD.</h3>
+							<p>sv logistics, sanganer, jaipur</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						
+						
+						<div class="">
+							<button class="control-btn btn btn-primary" onclick="loadPopup()">Add User</button>
+						</div>
+						<div class="">
+							<button class="control-btn btn btn-primary" onclick="loadPopupUser()">Edit Details</button>
+						</div>
+						<div class="">
+							<button class="control-btn btn btn-primary" onclick="loadPopupPassword()">Change Password</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div id="table"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		
+		<div class="popup" id="popup">
+			<div class="popup-panel">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-8">
+							<div class="popup-container">
+								<div class="popup-container-header">
+									<p class="popup-container-header-text">Add User</p>
+									<div style="float: right; margin: 10px; font-size: 25px; cursor:pointer;" onclick="closePopup()">
+										&times;
+									</div>
+								</div>
+								<div class="popup-container-body">
+									<div>
+										<form onsubmit="return addUser()" id="createUser">
+											<label for="name">Full Name</label>
+											<input type="text" name="name" class="form-control" required>
+											<br/>
+											<label for="">Enter Email</label>
+											<input type="email" name="email" class="form-control" required>
+											<br/>
+											<label for="">Enter Phone</label>
+											<input type="number" name="phone" class="form-control" required>
+											<br/>
+											<label for="">Enter Password</label>
+											<input type="password" name="password" class="form-control" required>
+											<br/>
+											<label for="">Confirm Password</label>
+											<input type="password" name="password2" class="form-control" required>
+											
+											<br/>
+											<div class="form-component-submit">
+												<input type="submit" class="btn btn-primary" value="Add User"/>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<div class="popup" id="popupPassword">
+			<div class="popup-panel">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-8">
+							<div class="popup-container">
+								<div class="popup-container-header">
+									<p class="popup-container-header-text">Chnage password</p>
+									<div style="float: right; margin: 10px; font-size: 25px; cursor:pointer;" onclick="closePopupPassword()">
+										&times;
+									</div>
+								</div>
+								<div class="popup-container-body">
+									<div>
+										<form onsubmit="return changePassword()" id="changePassword">
+											<label for="name">Previous Password</label>
+											<input type="password" name="pwd" class="form-control" required>
+											<br/>
+											<label for="">New Password</label>
+											<input type="password" name="npwd" class="form-control" required>
+											<br/>
+											<label for="">Re-Enter Password</label>
+											<input type="text" name="cpwd" class="form-control" required>
+											
+											<br/>
+											<div class="form-component-submit">
+												<input type="submit" class="btn btn-primary" value="Change Password"/>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		
+		<div class="popup" id="popupUser">
+			<div class="popup-panel">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-8">
+							<div class="popup-container">
+								<div class="popup-container-header">
+									<p class="popup-container-header-text">Update User</p>
+									<div style="float: right; margin: 10px; font-size: 25px; cursor:pointer;" onclick="closePopupUser()">
+										&times;
+									</div>
+								</div>
+								<div class="popup-container-body">
+									<div>
+										<form onsubmit="return updateUser()" id="updateUser">
+											<label for="name">Enter Full Name</label>
+											<input type="text" name="name" class="form-control" required>
+											<br/>
+											<label for="">Enter Phone no.</label>
+											<input type="number" name="phone" class="form-control" required>
+											<br/>
+											<label for="">Enter Email</label>
+											<input type="text" name="email" class="form-control" required>
+											
+											<br/>
+											<div class="form-component-submit">
+												<input type="submit" class="btn btn-primary" value="Update User"/>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+	</body>
+	<script>
+	var trashIcon= function(cell, formatterParams){
+		return "<i class='fa fa-trash'></i>";
+	}
+	
+	function loadPopup(){
+		document.getElementById('popup').style.display= 'block';
+	}
+	function closePopup(){
+		document.getElementById('popup').style.display= 'none';
+	}
+	function loadPopupPassword(){
+		document.getElementById('popupPassword').style.display= 'block';
+	}
+	function closePopupPassword(){
+		document.getElementById('popupPassword').style.display= 'none';
+	}
+	function loadPopupUser(){
+		document.getElementById('popupUser').style.display= 'block';
+	}
+	function closePopupUser(){
+		document.getElementById('popupUser').style.display= 'none';
+	}
+	function Startup(){
+		var table = new Tabulator("#table", {
+			data: getUsers(),           //load row data from array
+			layout:"fitColumns",      //fit columns to width of table
+			responsiveLayout:"hide",  //hide columns that dont fit on the table
+			tooltips:true,            //show tool tips on cells
+			addRowPos:"top",          //when adding a new row, add it to the top of the table
+			history:true,             //allow undo and redo actions on the table
+			pagination:"local",       //paginate the data
+			paginationSize:7,         //allow 7 rows per page of data
+			movableColumns:true,      //allow column order to be changed
+			resizableRows:true,       //allow row order to be changed
+			initialSort:[             //set the initial sort order of the data
+				{column:"name", dir:"asc"},
+			],
+			columns:[                 //define the table columns
+				{title:"User Name", field:"name", editor:"input"},
+				{title:"User Email", field:"email", hozAlign:"left", editor:true},
+				{title:"User Phone", field:"phone", editor: "input"},
+				{formatter: trashIcon, align: 'center',cellClick: function(e, cell){deleteUser(cell.getRow().getData().id)} }
+			],
+		});
+	}
+	function getUsers(){
+		var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/userController.php',
+			data: {'method': 'viewAll'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+	}
+	function addUser(){
+		event.preventDefault();
+		
+		var form= document.getElementById('createUser');
+		let formData= new FormData(form);
+		formData.append('method', 'create');
+		
+		$.ajax({
+			type:"POST",
+			url:'backend/userController.php',
+			data: formData,
+			dataType: 'json',
+			processData: false,
+			contentType: false,
+			success: function(result){
+				if(result>1){
+					closePopup();
+					Startup();
+					
+				}	
+			}
+		})
+	}
+	function changePassword(){
+		event.preventDefault();
+		
+		var form= document.getElementById('changePassword');
+		let formData= new FormData(form);
+		formData.append('method', 'changePassword');
+		formData.append('id', localStorage.getItem('id'));
+		
+		$.ajax({
+			type:"POST",
+			url:'backend/userController.php',
+			data: formData,
+			dataType: 'json',
+			processData: false,
+			contentType: false,
+			success: function(result){
+				if(result==1){
+					closePopupPassword();
+					Startup();
+					
+				}	
+			}
+		})
+	}
+	function updateUser(){
+		event.preventDefault();
+		
+		var form= document.getElementById('updateUser');
+		let formData= new FormData(form);
+		formData.append('method', 'update');
+		formData.append('id', localStorage.getItem('id'));
+		$.ajax({
+			type:"POST",
+			url:'backend/userController.php',
+			data: formData,
+			dataType: 'json',
+			processData: false,
+			contentType: false,
+			success: function(result){
+				if(result==1){
+					closePopupUser();
+					Startup();
+					
+				}	
+			}
+		})
+	}
+	function deleteUser(id){
+		var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/userController.php',
+			data: {'method': 'delete', 'id': id},
+			success: function(result){
+				if(result==1){
+					Startup();
+				}	
+			}
+		});
+		return data;
+	}
+	</script>
+	
+</html>	

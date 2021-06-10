@@ -1,0 +1,24 @@
+<?php
+require_once 'dbconnect.php';
+
+class OrderCourier extends Database{
+	
+	function __construct(){
+		parent::__construct();
+	}
+	
+	function createOrder(){
+		
+	}
+	function getOrder(){
+		
+	}
+	function editOrder(){
+		
+	}
+	function deleteOrder(){
+		
+	}
+	
+}
+?>

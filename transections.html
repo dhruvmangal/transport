@@ -1,0 +1,307 @@
+<html>
+	<head>
+		<title> Logistics </title>
+		<link rel="stylesheet" href="static/css/awesomplete.css" />
+		<script src="static/js/awesomplete.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+	
+		<link rel="stylesheet" href="static/css/main.css">
+		<script src="static/js/main.js"></script>
+		
+		<link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+		<link href="https://unpkg.com/tabulator-tables@4.7.2//dist/css/bootstrap/tabulator_bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body onload ="Startup(); loginCheck(); auto();">
+		<header>
+			<div class="header-logo">
+				<button class="btn header-logo-btn" onclick="openNav()">
+					<p>&#9776;</p>
+				</button>
+				
+			</div>
+			<div class="header-head">
+				<h4 style="color: white;">Transactions</h4>
+			</div>
+			<div class ="header-user">
+				<button class="btn dropdown">
+					<i class="fa fa-user"></i>
+				</button>
+				<div class="dropdown-panel"> 
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-user"></i><a href="profile.html">Profile</a>
+					</div>
+					
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-book"></i><a href="transections.html">Transactions</a>
+					</div>
+					<div class="dropdown-panel-list" onclick="logout()">
+						<i class = "fa fa-sign-out"></i><a href="">Logout</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav id="nav">
+			<div class="nav-panel">
+				<div class="nav-header">
+					<div class="nav-menu">
+						Menu
+					</div>
+					<div class="nav-close" onclick="closeNav()">
+						&times;	
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="nav-list">
+						<i class="fa fa-home icon"></i> <a href="index.html"> Home</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-user icon"></i> <a href="consigner.html"> Consignor</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-truck icon"></i> <a href="transport.html"> Transport</a>
+					</div>
+					<div class="nav-list">
+						<i class = "fa fa-book icon"></i><a href="transections.html"> Transactions</a>
+					</div>
+					
+					<div class="nav-list">
+						<i class = "fa fa-list-alt"></i><a href="other.html"> Others</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<section>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#">Logistics</a></li>
+							<li><a href="courierTransaction.html">Courier</a></li>
+							<br/>
+						  </ul>
+					</div>
+					<div class="col-md-4">
+						
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12" >
+						<form id="searchForm"  >
+							<div style="float: left;margin: 10px; width: 200px; ">
+								<input type="text" class="form-control" id="conte" name="cnote" placeholder ="Search CNOTE">
+							</div>
+							<div style="float:left;margin: 10px; width: 200px;">
+								<input type="text" class="form-control" name="consigner" placeholder= "Search Consigner" id="consigner"/>
+							</div>
+							<div style="float:left;margin: 10px; width: 200px;">
+								<input type="text" class="form-control" name="consignee" placeholder= "Search Consignee" id="consignee"/>
+							</div>
+							<div style="float:left;margin: 15px 10px; width: 20px;">
+								<p>From</p>
+							</div>
+							<div style="float:left;margin: 10px; width: 200px;">
+								<input type="date" class="form-control" name="from" placeholder= "From date"/>
+							</div>
+							<div style="float:left;margin: 15px 10px; width: 20px;">
+								<p>To</p>
+							</div>
+							<div style="float:left;margin: 10px; width: 200px;">
+								<input type="date" class="form-control" name="to" placeholder= "From date"/>
+							</div>
+							<div style="float:left;margin: 10px; width: 100px;">
+								<input type="submit" class="form-control btn btn-primary" value="Search"/>
+							</div>
+						</form>	
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div>
+							<button id="download-csv" class=" btn btn-default" style="float:right;margin:5px; ">Download CSV</button>
+							
+						</div>
+
+						<div id="table">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
+
+<script>
+var data= null; 
+
+document.getElementById('searchForm').addEventListener('submit', function(){
+	event.preventDefault();
+		let myForm= document.getElementById('searchForm');
+		let formData= new FormData(myForm);
+		formData.append('method', 'viewAll');
+		$.ajax({
+			type:"POST",
+			url:'backend/orderController.php',
+			data: formData,
+			dataType: 'json',
+			processData: false,
+			contentType: false,
+			success: function(result){
+					//console.log(result);
+					window.data= result;
+					Startup()
+			}
+		})
+});
+
+function paymentEditor(row,cell){
+		var arr= row.getData();
+		
+		$.ajax({
+			type:"POST",
+			
+			url:'backend/orderController.php',
+			data: {'method': 'update', 'id': arr['id'], 'payment': arr['payment']},
+			success: function(result){
+				if(result==1){
+					alert('update successful');
+				}	
+			}
+		})
+}
+
+function Startup(){
+		if(window.data==null){
+			window.data= getTransections();
+		}
+		var table = new Tabulator("#table", {
+			
+			downloadRowRange: 'all',
+			height: 430,
+			data: window.data,           //load row data from array
+			layout:"fitData",      //fit columns to width of table
+			tooltips:true,            //show tool tips on cells
+			addRowPos:"top",          //when adding a new row, add it to the top of the table
+			history:true,             //allow undo and redo actions on the table
+			pagination:"local",       //paginate the data
+			paginationSize:9,         //allow 7 rows per page of data
+			movableColumns:true,      //allow column order to be changed
+			resizableRows:true,       //allow row order to be changed
+			initialSort:[             //set the initial sort order of the data
+				{column:"name", dir:"asc"},
+			],
+			columns:[                 //define the table columns
+				{title:"Date", field:"date", editor:"input", },
+				{title:"CNOTE", field:"cnote", editor:"input"},
+				{title:"CONSIGNOR", field:"consigner", hozAlign:"left", editor:true},
+				{title:"CONSIGNEE", field:"consignee", editor: "input"},
+				{title:"TRANSPORT", field:"transport", hozAlign:"center", width:70, editor:true},
+				{title:"ZONE", field:"zone", width:30, editor:"input"},
+				{title:"FROM LOCATION", field:"from", width:70, hozAlign:"center"},
+				{title:"TO LOCATION", field:"to", width:70,  hozAlign:"center", editor:true},
+				{title:"WEIGHT", field:"actual_weight", width:50,  hozAlign:"center", editor:true},
+				{title:"CHARGED WEIGHT", field:"charged_weight", width:50,  hozAlign:"center", editor:true},
+				{title:"NUMBER OF BOXES", field:"boxes", width:50,  hozAlign:"center", editor:true},
+				{title:"ROUTE RATE", field:"rate", width:50,  hozAlign:"center", editor:true},
+				{title:"BASIC FREIGHT", field:"freight", width:50,  hozAlign:"center", editor:true},
+				{title:"ODA CHARGES", field:"oda", width:50,  hozAlign:"center", editor:true},
+				{title:"CFT", field:"cft", width:50,  hozAlign:"center", editor:true},
+				{title:"RSC/FOV", field:"rsc", width:50,  hozAlign:"center", editor:true},
+				{title:"FSC", field:"fsc", width:50,  hozAlign:"center", editor:true},
+				
+				{title:"CN", field:"cn", width:50,  hozAlign:"center", editor:true},
+				{title:"GREEN TAX", field:"green_tax", width:50,  hozAlign:"center", editor:true},
+				{title:"AMOUNT", field:"amount", width:70,  hozAlign:"center", editor:true},
+				{title:"CGST", field:"cgst", width:70,  hozAlign:"center", editor:true},
+				{title:"SGST", field:"sgst", width:70,  hozAlign:"center", editor:true},
+				{title:"TOTAL AMOUNT", field:"total_amount",  hozAlign:"center", editor:true},
+				{title:"PAYMENT", field:"payment",  hozAlign:"center", editor:"select", editorParams: {'COLLECTED': 'COLLECTED', 'PENDING': 'PENDING' }, cellEdited: function(row, cell){paymentEditor(row, cell)}},
+			],
+			
+			
+		});
+		
+		document.getElementById("download-csv").addEventListener("click", function(){
+			table.download("csv", "data.csv", {delimiter:","});
+		});
+
+		//trigger download of data.json file
+		
+		
+
+	}
+	function getTransections(){
+		var data= '';
+		
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/orderController.php',
+			data: {'method': 'viewAll'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+	}
+	function getConsigner(){
+		var data= '';
+		
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/orderController.php',
+			data: {'method': 'consigner'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+	}
+	function getConsignee(){
+		var data= '';
+		
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/orderController.php',
+			data: {'method': 'consignee'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+	}
+	function auto(){
+		//alert('a');
+		
+		var consigner = document.getElementById("consigner");
+		var consignee = document.getElementById("consignee");
+		new Awesomplete(consigner, {
+			list: getConsigner(),
+		
+		});
+		new Awesomplete(consignee, {
+			list: getConsignee(),
+		
+		});
+	}
+	
+</script>	

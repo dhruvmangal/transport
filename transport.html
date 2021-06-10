@@ -1,0 +1,228 @@
+<html>
+	<head>
+		<title> Logistics </title>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<link rel="stylesheet" href="static/css/main.css">
+		<script src="static/js/main.js"></script>
+		<link href="https://unpkg.com/tabulator-tables@4.7.2/dist/css/tabulator.min.css" rel="stylesheet">
+		<link href="https://unpkg.com/tabulator-tables@4.7.2//dist/css/bootstrap/tabulator_bootstrap.min.css" rel="stylesheet">
+		<script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.7.2/dist/js/tabulator.min.js"></script>
+		<style>
+			
+		</style>
+		<script>
+			
+		</script>
+	</head>
+	<body onload ="Startup(); loginCheck();">
+		<header>
+			<div class="header-logo">
+				<button class="btn header-logo-btn" onclick="openNav()">
+					<p>&#9776;</p>
+				</button>
+			</div>
+			<div class="header-head">
+				<h4 style="color: white;">Transport</h4>
+			</div>
+			<div class ="header-user">
+				<button class="btn dropdown">
+					<i class="fa fa-user"></i>
+				</button>
+				<div class="dropdown-panel"> 
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-user"></i><a href="profile.html">Profile</a>
+					</div>
+					
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-book"></i><a href="transections.html">Transactions</a>
+					</div>
+					<div class="dropdown-panel-list" onclick="logout()">
+						<i class = "fa fa-sign-out"></i><a href="">Logout</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav id="nav">
+			<div class="nav-panel">
+				<div class="nav-header">
+					<div class="nav-menu">
+						Menu
+					</div>
+					<div class="nav-close" onclick="closeNav()">
+						&times;	
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="nav-list">
+						<i class="fa fa-home icon"></i> <a href="index.html"> Home</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-user icon"></i> <a href="consigner.html"> Consignor</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-truck icon"></i> <a href="transport.html"> Transport</a>
+					</div>
+					<div class="nav-list">
+						<i class = "fa fa-book icon"></i><a href="transections.html"> Transactions</a>
+					</div>
+					
+					<div class="nav-list">
+						<i class = "fa fa-list-alt"></i><a href="other.html"> Others</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<section>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="right-btn-panel">
+							<button class="btn btn-primary" onclick="loadPopup()">Add Transport</button>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div id="table">
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="popup" id="popup">
+			<div class="popup-panel">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2">
+						</div>
+						<div class="col-md-8">
+							<div class="popup-container">
+								<div class="popup-container-header">
+									<p class="popup-container-header-text">Add Transport</p>
+									<div style="float: right; margin: 10px; font-size: 25px; cursor:pointer;" onclick="closePopup()">
+										&times;
+									</div>
+								</div>
+								<div class="popup-container-body">
+									<div>
+										<form onsubmit="return createTransport()" id="createTransport">
+											<label for="name">Transport Name</label>
+											<input type="text" name="name", class="form-control" required>
+											<br/>
+											
+											<div class="form-component-submit">
+												<input type="submit" class="btn btn-primary" value="Add Transport"/>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-2">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>	
+<script>
+	function loadPopup(){
+		document.getElementById('popup').style.display= 'block';
+	}
+	function closePopup(){
+		document.getElementById('popup').style.display= 'none';
+	}
+	function updateData(row, name){
+		var arr= row.getData();
+		arr['method']= 'update';
+		$.ajax({
+			type:"POST",
+			
+			url:'backend/transportController.php',
+			data: {'method': 'update', 'id': arr['id'], [name]: arr[name]},
+			//dataType: 'json',
+			//processData: false,
+			//contentType: false,
+			success: function(result){
+				if(result==1){
+					alert('update successful');
+				}	
+			}
+		})
+	}
+	function Startup(){
+		var table = new Tabulator("#table", {
+			data: getTransports(),           //load row data from array
+			layout:"fitColumns",      //fit columns to width of table
+			responsiveLayout:"hide",  //hide columns that dont fit on the table
+			tooltips:true,            //show tool tips on cells
+			addRowPos:"top",          //when adding a new row, add it to the top of the table
+			history:true,             //allow undo and redo actions on the table
+			pagination:"local",       //paginate the data
+			paginationSize:7,         //allow 7 rows per page of data
+			movableColumns:true,      //allow column order to be changed
+			resizableRows:true,       //allow row order to be changed
+			initialSort:[             //set the initial sort order of the data
+				{column:"name", dir:"asc"},
+			],
+			columns:[                 //define the table columns
+				{title:"id", field:"id", width:100},
+				{title:"Transport", field:"name", hozAlign:"left", editor:true, cellEdited: function(row){ updateData(row, 'name');}},
+			],
+		});
+	}
+	function getTransports(){
+		var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/transportController.php',
+			data: {'method': 'viewAll'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+	}
+	function createTransport(){
+		event.preventDefault();
+		
+		var form= document.getElementById('createTransport');
+		let formData= new FormData(form);
+		formData.append('method', 'create');
+		
+		$.ajax({
+			type:"POST",
+			url:'backend/transportController.php',
+			data: formData,
+			dataType: 'json',
+			processData: false,
+			contentType: false,
+			success: function(result){
+				if(result=='1'){
+					closePopup();
+					Startup();
+				}	
+			}
+		})
+	}
+	function viewTransport(){
+		   
+	}	
+	
+</script>
+		

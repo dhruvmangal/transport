@@ -1,0 +1,327 @@
+<html>
+	<head>
+		<title> Logistics </title>
+		<link rel="stylesheet" href="static/css/awesomplete.css" />
+		<script src="static/js/awesomplete.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<link rel="stylesheet" href="static/css/main.css">
+		<script src="static/js/main.js"></script>
+		
+	</head>
+	<body onload =" loginCheck(); auto();">
+		<header>
+			<div class="header-logo">
+				<button class="btn header-logo-btn" onclick="openNav()">
+					<p>&#9776;</p>
+				</button>
+			</div>
+			<div class="header-head">
+				<h4 style="color: white;">Courier</h4>
+			</div>
+			<div class ="header-user">
+				<button class="btn dropdown">
+					<i class="fa fa-user"></i>
+				</button>
+				<div class="dropdown-panel"> 
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-user"></i><a href="profile.html">Profile</a>
+					</div>
+					
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-book"></i><a href="transections.html">Transactions</a>
+					</div>
+					<div class="dropdown-panel-list" onclick="logout()">
+						<i class = "fa fa-sign-out"></i><a href="">Logout</a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav id="nav">
+			<div class="nav-panel">
+				<div class="nav-header">
+					<div class="nav-menu">
+						Menu
+					</div>
+					<div class="nav-close" onclick="closeNav()">
+						&times;	
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="nav-list">
+						<i class="fa fa-home icon"></i> <a href="index.html"> Home</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-user icon"></i> <a href="consigner.html"> Consignor</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-truck icon"></i> <a href="transport.html"> Transport</a>
+					</div>
+					<div class="nav-list">
+						<i class = "fa fa-book icon"></i><a href="transections.html"> Transactions</a>
+					</div>
+					
+					<div class="nav-list">
+						<i class = "fa fa-list-alt"></i><a href="other.html"> Others</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<section>
+			<div class="container-fluid">
+				<ul class="nav nav-tabs">
+					<li><a href="index.html">Logistics</a></li>
+					<li class="active"><a href="courier.html">Courier</a></li>
+				 </ul>
+				 <br/>
+				 <form  id="courier_order" onsubmit="createOrder()" id="formLine">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="form">
+							<div class="form-header">
+								<p class="form-header-heading">General Info</p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">
+								<label for="cnote">CNOTE</label>
+								<input type="text" class="form-control" name="cnote"/>
+								<br/>
+								<label for="consigner" style="vertical-align: top;">Consignor</label><br/>
+								<input type="text" class="form-control input-box" name="consignor" id="consigner">
+								</br/>
+								<label for="consignee" style="vertical-align: top;">Consignee</label><br/>
+								<input type="text" class="form-control input-box" name="consignee" id="consignee" >
+								</br/>
+								<label for="transport" style="vertical-align: top;">Transport</label><br/>
+								<input type="text" class="form-control input-box" name="transport" id="transport">
+								<br/>
+								<label for="city" style="vertical-align: top;">City</label><br/>
+								<input type="text" class="form-control input-box" name="city" id="to">
+								<br/>
+								<label for="date">Date</label>
+								<input type="date" class="form-control" name="date">
+							</div>
+						</div>	
+					</div>
+					<div class="col-md-3">
+						<div class="form">
+							<div class="form-header">
+								<p class="form-header-heading">General Info</p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">	
+								<label for="acweight">Weight</label>
+								<input type="number" id="weight" class="form-control" name="weight" />
+								<br/>
+								<label for="Boxes">No Of Boxes</label>
+								<input type="number" class="form-control" name="boxes"/>
+								<br/>
+								<label for="observed weight" style="width:100%;">Rate/ KG</label>
+								<input type="number" class="form-control acWeight" name="rate" id="rate" />
+								<br/>
+								<label for="gst">GST</label>
+								<input type="text" class="form-control" name="gst" id="gst">
+							</div>
+						</div>
+					</div>
+					
+					<div class="col-md-3">
+						<div class="form">
+							<div class="form-header">
+								<p class="form-header-heading">Generated values</p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">	
+								<label for="acweight">Amount</label>
+								<input type="number" id="amount" class="form-control" name="amount"/>
+								<br/>
+								<label for="Boxes">CGST</label>
+								<input type="number" class="form-control" id="cgst" />
+								<br/>
+								<label for="observed weight" style="width:100%;">SGST</label>
+								<input type="number" class="form-control acWeight" id="sgst" step="0.01"/>
+								<br/>
+								<label for="gst">Total Amount</label>
+								<input type="text" class="form-control" id="total_amount" name="total_amount">
+							</div>
+							<br/>
+							
+						</div>
+						<input type="submit" name="Add" value="Add" class="form-control btn btn-success"/>
+					</div>
+				</div>	
+				</form>
+			</div>
+		</section>	
+	</body>
+	
+	<script>
+		var number=0;
+			
+			function addLRow(){
+				
+				let transform= {'<>': 'div', 'class': 'vol-row', 'html':[
+					{'<>':'div', 'class': 'form-value', 'html':[
+						{'<>':'label', 'for': 'box no', 'html':'Box No'},
+						{'<>':'input', 'type': 'number', 'class':'form-control no_box acWeight'}
+					]},
+					{'<>':'div', 'class': 'form-value', 'html':[
+						{'<>':'label', 'for': 'width', 'html':'Width'},
+						{'<>':'input', 'type': 'number', 'class':'form-control width acWeight'}
+					]},
+					{'<>':'div', 'class': 'form-value', 'html':[
+						{'<>':'label', 'for': 'height', 'html':'Height'},
+						{'<>':'input', 'type': 'number', 'class':'form-control height acWeight'}
+					]},
+					{'<>':'div', 'class': 'form-value', 'html':[
+						{'<>':'label', 'for': 'length', 'html':'Length'},
+						{'<>':'input', 'type': 'number', 'class':'form-control length acWeight'}
+					]}
+					
+				]
+					
+				};
+				var x= json2html.transform({},transform);
+				document.getElementById('formL').innerHTML+=x; 
+				startup();
+			}
+			
+			
+			function auto(){
+				document.getElementById('weight').addEventListener('input', function(){calculateAmount();; calculateGST();} );
+				document.getElementById('rate').addEventListener('input', function(){calculateAmount(); calculateGST()} );
+				document.getElementById('gst').addEventListener('input', function(){calculateAmount(); calculateGST()} );
+				var name= getNames();
+				var city= getCitiesName();
+				var trans= getTransportNames();
+				var consigner = document.getElementById("consigner");
+				var consignee = document.getElementById("consignee");
+				var transport= document.getElementById('transport');
+				new Awesomplete(consigner, {
+					list: name,
+					replace: function(suggestion) {
+						this.input.value = suggestion.label;
+						window.id= suggestion.value;
+						
+					}
+				});
+				
+				new Awesomplete(consignee, {
+					list: name,
+					replace: function(suggestion) {
+						this.input.value = suggestion.label;
+						window.id= suggestion.value;
+						
+					}
+				});
+				
+				new Awesomplete(transport, {
+					list: trans,
+					replace: function(suggestion) {
+						this.input.value = suggestion.label;
+						window.id= suggestion.value;
+						
+					}
+				});
+				new Awesomplete(to, {
+					list: city,
+					replace: function(suggestion) {
+						this.input.value = suggestion.label;
+						window.id= suggestion.value;
+						
+					}
+				});
+			}
+			function getTransportNames(){
+					var data= '';
+					$.ajax({
+						async: false,
+						type:"POST",
+						url:'backend/transportController.php',
+						data: {'method': 'viewNames'},
+						success: function(result){
+							data= JSON.parse(result);
+						}
+					});
+					return data;
+			}
+			function getNames(){
+				var data= '';
+					$.ajax({
+						async: false,
+						type:"POST",
+						url:'backend/consignerController.php',
+						data: {'method': 'viewNames'},
+						success: function(result){
+							data= JSON.parse(result);
+						}
+					});
+				return data;
+			}
+			function getCitiesName(){
+				var data= '';
+				$.ajax({
+					async: false,
+					type:"POST",
+					url:'backend/cityController.php',
+					data: {'method': 'viewNames'},
+					success: function(result){
+						data= JSON.parse(result);
+					}
+				});
+				return data;
+			}
+			
+			function createOrder(){
+				event.preventDefault();
+				var form= document.getElementById('courier_order');
+				let formData= new FormData(form);
+				formData.append('method', 'create');
+				$.ajax({
+					type:"POST",
+					url:'backend/orderCourierController.php',
+					data: formData,
+					dataType: 'json',
+					processData: false,
+					contentType: false,
+					success: function(result){
+						if(result>1){
+							alert('Data has been added successfully');
+							document.getElementById('formLine').reset();
+						}
+					}
+				})
+			}
+			
+			function calculateAmount(){
+				
+				var weight= document.getElementById('weight').value;
+				var rate= document.getElementById('rate').value;
+				document.getElementById('amount').value= weight*rate;
+				
+				
+			}
+			function calculateGST(){
+				var amount= document.getElementById('amount').value;
+				var gst= document.getElementById('gst').value;
+				var n= Number(Number(amount)+Number(gst*amount/100));
+				document.getElementById('cgst').value=parseFloat(((n-amount)/2).toPrecision(4));
+				document.getElementById('sgst').value=parseFloat(((n-amount)/2).toPrecision(4));				
+				document.getElementById('total_amount').value=n;
+			}
+	</script>
+</html>	
+		

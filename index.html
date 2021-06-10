@@ -1,0 +1,709 @@
+<html>
+	<head>
+		<title> Logistics </title>
+		<link rel="stylesheet" href="static/css/awesomplete.css" />
+		<script src="static/js/awesomplete.js"></script>
+		<script src="static/js/indexdb.js"></script>
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/1.3.0/json2html.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.min.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		
+		<link rel="stylesheet" href="static/css/main.css">
+		<script src="static/js/main.js"></script>
+		
+	</head>
+	<body onload ="startup(); auto(); loginCheck();">
+		<header>
+			<div class="header-logo">
+				<button class="btn header-logo-btn" onclick="openNav()">
+					<p>&#9776;</p>
+				</button>
+			</div>
+			<div class="header-head">
+				<h4 style="color: white;">Home</h4>
+			</div>
+			<div class ="header-user">
+				<button class="btn dropdown">
+					<i class="fa fa-user"></i>
+				</button>
+				<div class="dropdown-panel"> 
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-user"></i><a href="profile.html">Profile</a>
+					</div>
+					
+					<div class="dropdown-panel-list">
+						<i class = "fa fa-book"></i><a href="transections.html">Transactions</a>
+					</div>
+					<div class="dropdown-panel-list" onclick="logout()">
+						<i class = "fa fa-sign-out"></i><a href="">Logout</a>
+					</div>
+					<div class="dropdown-panel-list">
+							
+							<input type="checkbox" id="hideItem" style="float: left" onchange= "hideItem()"/>
+							<p style="float: left; margin: 0px 10px; color: black"> Hide Item</p>	
+
+					</div>
+				</div>
+			</div>
+		</header>
+		<nav id="nav">
+			<div class="nav-panel">
+				<div class="nav-header">
+					<div class="nav-menu">
+						Menu
+					</div>
+					<div class="nav-close" onclick="closeNav()">
+						&times;	
+					</div>
+				</div>
+				<div class="nav-body">
+					<div class="nav-list">
+						<i class="fa fa-home icon"></i> <a href="index.html"> Home</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-user icon"></i> <a href="consigner.html"> Consignor</a>
+					</div>
+					<div class="nav-list">
+						<i class="fa fa-truck icon"></i> <a href="transport.html"> Transport</a>
+					</div>
+					<div class="nav-list">
+						<i class = "fa fa-book icon"></i><a href="transections.html"> Transactions</a>
+					</div>
+					
+					<div class="nav-list">
+						<i class = "fa fa-list-alt"></i><a href="other.html"> Others</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<section>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8 col-8">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#">Logistics</a></li>
+							<li><a href="courier.html">Courier</a></li>
+							
+						  </ul>
+					</div>
+					<div class="col-md-4 col-4">
+						<!--<button class="btn btn-success" style="float: right;" onclick="add()">Save For Later</button>-->
+					</div>
+				</div>
+				
+				  <br/>
+				<form id="formLine" onsubmit="createOrder()">  
+				<div class="row" >
+					<div class="col-md-3 ">
+						<div class="form" >
+							<div class="form-header">
+								<p class="form-header-heading">General Info</p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">	
+								<label for="">CNOTE</label>
+								<input type="text" class="form-control" id="cnote" required />
+								<br/>
+								<label for="consigner" style="vertical-align: top;">Consigner</label><br/>
+								<input type="text" class="form-control input-box" id="consigner" required />
+								<br/>
+								<label for="consigner">Consignee</label><br/>
+								<input type="text" class="form-control input-box" id="consignee" required />
+								<br/>
+								<label for="consigner" style="vertical-align: top;">Transport</label><br/>
+								<input type="text" class="form-control input-box" id="transport" required />
+								<br/>
+								<label for="consigner" style="vertical-align: top;">Zone</label><br/>
+								<select class="form-control" id="deliveryType" onchange= "getRate()" required >
+									<option value="a">A Zone</option>
+									<option value="b">B Zone</option>
+									<option value="c">C Zone</option>
+									<option value="d">D Zone</option>
+									<option value="e">E Zone</option>
+									<option value="f">F Zone</option>
+									<option value="g">G Zone</option>
+									<option value="h">H Zone</option>
+									<option value="i">I Zone</option>
+									<option value="j">J Zone</option>
+								</select>
+								<br/>
+								<label for="consigner">To City</label><br/>
+								<input type="text" class="form-control input-box" id="to" required />
+								<br/>
+								<input type="hidden" id="toValue"/>
+								<label for="consigner">Date</label>
+								<input type="date" class="form-control" id="datePicker" required />
+								<br/>
+								<input type="checkbox" id="odaFlag" style="float: left;" onchange="activeODA();"><p style="float: left; font-size:13px; margin:2px 10px  " >Charge ODA</p>
+							</div>	
+							
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form" >
+							<div class="form-header">
+								<p class="form-header-heading">Weight Measurement </p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">
+							
+								<label for="weight">Weight</label>
+								<input type="number" class="form-control acWeight" id="weight"/>
+								<br/>
+								
+								
+								<label for="observed weight">Total Boxes</label>
+								<input type="text" class="form-control" id="boxes"/>
+								
+								<br/>
+								<label for="Volumetric Weight">Volumetric Weight</label>
+								<div id="form">
+									
+									<div class="vol-row">
+										<div class="form-value ">
+											<label for="box no">Box No</label>
+											<input type="number" class="form-control no_box acWeight">
+										</div>
+										<div class="form-value ">
+											<label for="box no">Width</label>
+											<input type="number" step="0.01" class="form-control width acWeight">
+										</div>
+										<div class="form-value ">
+											<label for="box no">height</label>
+											<input type="number" step="0.01" class="form-control height acWeight">
+										</div>
+										<div class="form-value ">
+											<label for="box no">length</label>
+											<input type="number" step="0.01" class="form-control length acWeight" >
+										</div>
+									</div>	
+								</div>
+								<p class="repeat-form" onclick="addRow()">Add Row</p>
+								<br/>	
+								<br/>
+								<label for="observed weight">Rate/ KG</label>
+								<input type="number" step="0.01" class="form-control acWeight" id="rate" />
+								<br/>
+								<label for="CFT" id="cftLabel">CFT</label>
+								<input type="number" step="0.01" class="form-control acWeight" id="cft" />
+								<br/>
+								<label for="observed weight">Observed Weight</label>
+								<input type="text" step="0.01" class="form-control" id="actual-weight-value" readonly/>
+								<br/>
+								<label for="Payment">Payment</label>
+								<select class="form-control" id="payment">
+									<option value="pending">Pending</option>
+									<option value="collected">Collected</option>
+								</select>
+								<br/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form">
+							
+							<div class="form-header">
+								<p class="form-header-heading">Selected Values </p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">
+								<label for="fuel linkage " id="invLabel">INV Val</label>
+								<input type="number" class="form-control" id="invValue" value="200000" />
+								<br/>
+								
+								<label for="fuel linkage " id="fuelLabel">Fuel Surcharge( in %)</label>
+								<input type="number" step="0.01" class="form-control" id="fuel" name ="fuel" min='1' max="100" required />
+								<br/>
+								
+								<label for="rsc/fov" id="fovLabel">RCS/FOV( in %)</label>
+								<input type="number" class="form-control" id="fov" step="0.01">
+								<br/>
+								
+								
+								
+								<label for="oda charges" id="odaLabel">ODA Charges</label>
+								<input type="number" step="0.01" class="form-control" id="oda">
+								<br/>
+								
+								
+								
+								<label for="Green Day">GST</label>
+								<input type="number" class="form-control" id="gst" required>
+								<br/>
+								
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-md-3">
+						
+								
+					
+						<div class="form">
+							
+							<div class="form-header">
+								<p class="form-header-heading">Generated Values </p>
+								<p class="form-header-menu" onclick="expandForm(this)" ontouch= "expandForm(this)" class="expandIcon">&#10097;</p>
+							</div>
+							<div class="form-body">
+								<label for="freight" id="freightLabel">Basic Freight</label>
+								<input type="number" step="0.01" class="form-control" id="freight">
+								<br/>	
+								
+								
+								<label for="fuel linkage" id="fscLabel">Fuel Surcharge Value</label>
+								<input type="number" step="0.01" class="form-control" id="fuel-value" name ="fuel" required />
+								<br/>
+								
+								<label for="fuel linkage " id="fovValueLabel">FOV Value</label>
+								<input type="number" class="form-control" id="fov-value" step="0.01" name ="fuel" required />
+								<br/>
+								
+								<label for="CN" id="cnLabel">CN</label>
+								<input type="number" step="0.01" class="form-control" id="cn" value="100"/>
+								<br/>
+									
+								
+								<label for="fuel linkage" id="odavalueLabel">ODA Value</label>
+								<input type="number" step="0.01" class="form-control" id="oda-value" name ="fuel"  required />
+								<br/>
+								
+								<label for="Green Day">Green Tax</label>
+								<input type="number" step="0.01" class="form-control" value='0' id="green-tax"/>
+								<br/>
+								
+								<label for="total">Amount</label>
+								<input type="number" class="form-control" value='0'  step="0.01" id="amount"/>
+								<br/>
+								
+								<label for="total">Total Amount( with gst )</label>
+								<input type="number" class="form-control" value='0' step="0.01" id="total-amount"/>
+								<br/>
+							</div>	
+					<button class="btn btn-success form-control" type="submit" style="float: left; margin:2%; width:46%;">Add</button>			
+					<button class="btn btn-success form-control" id="show-btn"style="float: left; margin:2%; width:46%;">View</button>
+							
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			
+		</section>
+		
+		<div>
+			<div class="popup" id="popup">
+				<div class="popup-panel">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-md-2">
+							</div>
+							<div class="col-md-8">
+								<div class="popup-container">
+									
+									<div class="container-fluid">
+										<div class="row">
+											<div class="col-md-12">	
+											
+												<button class ="btn btn-success controller"><i class="fa fa-thumb-tack"></i> Save</button>
+												
+												<button class ="btn btn-danger controller"><i class="fa fa-trash"></i> Discard</button>
+
+												<button class ="btn btn-primary controller"><i class="fa fa-print"></i> Print</button>
+												
+												<p class="close-btn" id="close-btn"> &times;</p>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<p> <span><b>C-Note</b> </span> </p>
+												<h4 class="data-val" id="cnote-value"></h4>
+												<br/>
+												<p> <span><b>Consigner</b> </span></p>
+												 <h4 class="data-val" id="consigner-value"></h4>
+												<br/>
+												<p> <span><b>Consignee</b> </span> </p>
+												<h4 class="data-val" id="consignee-value"></h4>
+												<br/>
+												<p> <span><b>Transport</b> </span></h4>
+												 <h4 class="data-val" id="transport-value"></h4>
+												 <br/>
+												<p> From  <b><span id="from-value"> </span></b> to <b><span id="to-value"></span></b></p>
+												<br/>
+												<p>Date  <span id="date-value"> </span></p>
+											</div>
+											<div class="col-md-4">
+												<p> <span><b>Observed Weight</b> </span> <span class="data-value" id="weight-value"></span></p>
+												<hr/>
+												<p> <span><b>INV Value</b> </span> <span class="data-value" id="inv-value"></span></p>
+												<hr/>
+												<p> <span><b>Basic Freight</b> </span> <span class="data-value" id="freight-value"></span></p>
+												<hr/>
+												<p> <span><b>Fuel Surcharge Value</b> </span> <span class="data-value" id="fuel-surcharge-value"></span></p>
+												<hr/>
+												<p> <span><b>FOV</b> </span> <span class="data-value" id="FOV-value"></span></p>
+												<hr/>
+												<p> <span><b>CN</b> </span> <span class="data-value" id="CN-value"></span></p>
+												<hr/>
+												<p> <span><b>ODA</b> </span> <span class="data-value" id="ODA-value"></span></p>
+												<hr/>
+												<p> <span><b>Green Tax</b> </span> <span class="data-value" id="greenTax-value"></span></p>
+		
+											</div>
+											<div class="col-md-4">
+												<h4> <span><b>Amount</b> </span> <span class="data-value" id="amount-value"></span></h4>
+												<hr/>
+												<h6><span><b>GST</b></span><span class="data-value" id="gst-value"></span></h6>
+												<hr/>
+												<h4><span><b>Total Amount</b></span><span class="data-value" id="total_amount-value"></span></h4>
+											</div>
+										</div>
+									</div>	
+								</div>	
+							</div>
+							<div class="col-md-2">
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+
+</html>
+
+<script>
+var id=0;
+var greentax= 0;
+var fscmin=0;
+var rovmin=0;
+var odamin=0;
+
+function auto(){
+	var x= getNames();
+	var trans= getTransportNames();
+	var city= getCitiesName();
+	var consigner = document.getElementById("consigner");
+	// Show label but insert value into the input:
+	var consignee= document.getElementById("consignee");
+	new Awesomplete(consigner, {
+		list: x,
+		replace: function(suggestion) {
+			this.input.value = suggestion.label;
+			window.id= suggestion.value;
+			getAllData(suggestion.value);
+		}
+	});
+	new Awesomplete(consignee, {
+		list: x,
+		replace: function(suggestion) {
+			this.input.value = suggestion.label;
+			
+		}
+	});
+	new Awesomplete(transport, {
+		list: trans,
+		replace: function(suggestion){
+			this.input.value = suggestion.label;
+			
+		}
+	});
+	new Awesomplete(to, {
+		list: city,
+		replace: function(suggestion){
+			this.input.value = suggestion.label;
+			document.getElementById('toValue').value= suggestion.value;
+			//calculateGreenTax(suggestion.greentax);
+			window.greentax= suggestion.value;
+			//alert(window.greentax);
+			calculateGreenTax();
+			allCalculations();
+		}
+	});
+}
+function getNames(){
+	var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/consignerController.php',
+			data: {'method': 'viewNames'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+	return data;
+}
+function getAllData(id){
+	var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/consignerController.php',
+			data: {'method': 'view', 'id': id},
+			success: function(result){
+				data= JSON.parse(result);
+				document.getElementById('cft').value= data['cft'];
+				document.getElementById('fov').value= data['rov'];
+				document.getElementById('oda').value= data['oda'];
+				document.getElementById('fuel').value= data['fsc'];
+				window.fscmin= data['fscmin'];
+				window.rovmin= data['rovmin'];
+				window.odamin= data['odamin'];
+				getRate();
+				allCalculations();
+			}
+		});
+	return data;
+}
+function getTransportNames(){
+		var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/transportController.php',
+			data: {'method': 'viewNames'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+}
+function getCitiesName(){
+		var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/cityController.php',
+			data: {'method': 'viewNames'},
+			success: function(result){
+				data= JSON.parse(result);
+			}
+		});
+		return data;
+	}
+	
+function getRate(){
+	var data= '';
+		$.ajax({
+			async: false,
+			type:"POST",
+			url:'backend/consignerController.php',
+			data: {'method': 'viewRate', 'id': window.id},
+			success: function(result){
+				data= JSON.parse(result);
+				var d= document.getElementById('deliveryType').value;
+				switch(d){
+					case 'a':
+						document.getElementById('rate').value= data['aRate'];	
+					break;
+					
+					case 'b':
+						document.getElementById('rate').value= data['bRate'];	
+					break;
+					
+					case 'c':
+						document.getElementById('rate').value= data['cRate'];	
+					break;
+					
+					case 'd':
+						document.getElementById('rate').value= data['dRate'];	
+					break;
+					
+					case 'e':
+						document.getElementById('rate').value= data['eRate'];	
+					break;
+					
+					case 'f':
+						document.getElementById('rate').value= data['fRate'];	
+					break;
+					
+					case 'g':
+						document.getElementById('rate').value= data['gRate'];	
+					break;
+					
+					case 'h':
+						document.getElementById('rate').value= data['hRate'];	
+					break;
+					
+					case 'i':
+						document.getElementById('rate').value= data['iRate'];	
+					break;
+					
+					case 'j':
+						document.getElementById('rate').value= data['jRate'];	
+					break;
+					
+				}
+				allCalculations();
+			}
+			
+		});
+		
+}
+
+function createOrder(){
+	event.preventDefault();
+	var cnote= document.getElementById('cnote').value;
+	var consigner= document.getElementById('consigner').value;
+	var consignee= document.getElementById('consignee').value;
+	var transport= document.getElementById('transport').value;
+	var zone= document.getElementById('deliveryType').value;
+	var from= 'Jaipur';
+	var to= document.getElementById('to').value;
+	var date= document.getElementById('datePicker').value;
+	var acweight= document.getElementById('weight').value;
+	var boxes= document.getElementById('boxes').value;
+	var chargedWeight= document.getElementById('actual-weight-value').value;
+	var rate= document.getElementById('rate').value;
+	var cft= document.getElementById('cft').value;
+	var payment= document.getElementById('payment').value;
+	var inv= document.getElementById('invValue').value;
+	var fsc= document.getElementById('fuel-value').value;
+	var rsc= document.getElementById('fov-value').value;
+	var oda= document.getElementById('oda-value').value;
+	var freight= document.getElementById('freight').value;
+	var cn= document.getElementById('cn').value;
+	//var gst= document.getElementById('total_amount-value').value;
+	//var cgst= document.getElementById('conte').value;
+	//var sgst= document.getElementById('conte').value;
+	var greenTax= document.getElementById('green-tax').value;
+	var amount= document.getElementById('amount').value
+	var totalAmount= document.getElementById('total-amount').value;
+	
+	if(window.num == boxes){
+	
+		$.ajax({
+				type:"POST",
+				url:'backend/orderController.php',
+				data: {
+					'method': 'create',
+					'cnote': cnote,
+					'consigner': consigner,
+					'consignee': consignee,
+					'transport': transport,
+					'zone': zone,
+					'from': from,
+					'to': to,
+					'date': date,
+					'acweight': acweight,
+					'boxes': boxes,
+					'chargedWeight': chargedWeight,
+					'rate': rate,
+					'cft': cft,
+					'payment': payment,
+					'rsc': rsc,
+					'inv': inv,
+					'fsc': fsc,
+					'oda': oda,
+					'freight': freight,
+					'cn': cn,
+					'greentax': greenTax,
+					'amount': amount,
+					'totalAmount': totalAmount
+				},
+				success: function(result){
+					if(result>1){
+						alert('Data has been added successfully');
+						document.getElementById('formLine').reset();
+					}
+				}
+			})
+			
+		}
+		else{
+				alert('Box numbers are mismatch');
+			}
+}	
+
+function hideItem(){
+	var cft= document.getElementById('cft');
+	var inv= document.getElementById('invValue');
+	var fuel= document.getElementById('fuel');
+	var fov= document.getElementById('fov');
+	var fsc= document.getElementById('fuel-value');
+	var rsc= document.getElementById('fov-value');
+	var oda= document.getElementById('oda');
+	var odaVal= document.getElementById('oda-value');
+	var freight= document.getElementById('freight');
+	var cn= document.getElementById('cn');
+	
+	var cftlabel= document.getElementById('cftLabel');
+	var invlabel= document.getElementById('invLabel');
+	var fuelLabel= document.getElementById('fuelLabel');
+	var fovlabel= document.getElementById('fovLabel');
+	var odaLabel= document.getElementById('odaLabel');
+	var freightLabel= document.getElementById('freightLabel');
+	var fscLabel= document.getElementById('fscLabel');
+	var fovValueLabel= document.getElementById('fovValueLabel');
+	var cnLabel= document.getElementById('cnLabel');
+	var odavalueLabel= document.getElementById('odavalueLabel');
+	var check= document.getElementById('hideItem');
+	if(check.checked==true){
+		cft.type= 'hidden';	
+		inv.type= 'hidden';
+		fuel.type= 'hidden';
+		fov.type= 'hidden';
+		fsc.type= 'hidden';
+		rsc.type= 'hidden';
+		oda.type= 'hidden';
+		odaVal.type= 'hidden';
+		freight.type= 'hidden';
+		cn.type= 'hidden';
+		
+		cftLabel.style.display= 'none';
+		invLabel.style.display= 'none';
+		fuelLabel.style.display= 'none';
+		fovLabel.style.display= 'none';
+		odaLabel.style.display= 'none';
+		freightLabel.style.display= 'none';
+		fscLabel.style.display= 'none';
+		fovValueLabel.style.display= 'none'
+		cnLabel.style.display= 'none';
+		odavalueLabel.style.display= 'none';
+	}else{
+		cft.type= 'number';
+		inv.type= 'number';
+		fuel.type= 'number';
+		fov.type= 'number';
+		fsc.type= 'number';
+		rsc.type= 'number';
+		odaVal.type= 'number';
+		oda.type= 'number';
+		freight.type= 'number';
+		cn.type= 'number';
+		
+		cftLabel.style.display= 'block';
+		invLabel.style.display= 'block';
+		fuelLabel.style.display= 'block';
+		fovLabel.style.display= 'block';
+		odaLabel.style.display= 'block';
+		freightLabel.style.display= 'block';
+		fscLabel.style.display= 'block';
+		fovValueLabel.style.display= 'block'
+		cnLabel.style.display= 'block';
+		odavalueLabel.style.display= 'block';
+	}
+}
+
+function activeODA(){
+	var x= document.getElementById('odaFlag');
+	
+	if(x.checked== true){
+		window.odaFlag= 1;
+	}else{
+		window.odaFlag= 0;
+	}
+	allCalculations();
+}
+</script>
